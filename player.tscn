@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://bo8hnkfxgffxg"]
+
+[ext_resource type="Script" uid="uid://ctjovtejydflu" path="res://player.gd" id="1_onrkg"]
+[ext_resource type="SpriteFrames" uid="uid://ca2uodbpc52d3" path="res://art/shoot_animation.tres" id="2_onrkg"]
+
+[node name="player" type="Node2D" unique_id=1398579073]
+script = ExtResource("1_onrkg")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1418998182]
+sprite_frames = ExtResource("2_onrkg")
+animation = &"shoot"
+autoplay = "idle"
+frame = 13
+frame_progress = 1.0

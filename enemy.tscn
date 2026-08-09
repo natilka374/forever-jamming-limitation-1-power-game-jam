@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://b0xd2hlebrj0n"]
+
+[ext_resource type="Script" uid="uid://ckglja5phn1mw" path="res://enemy.gd" id="1_4gyqm"]
+[ext_resource type="Texture2D" uid="uid://d1t4beytdl0ur" path="res://art/man pointing gun.jpeg" id="2_qi2p4"]
+[ext_resource type="SpriteFrames" uid="uid://ca2uodbpc52d3" path="res://art/shoot_animation.tres" id="3_qi2p4"]
+
+[node name="Enemy" type="Node2D" unique_id=897031378]
+script = ExtResource("1_4gyqm")
+reaction_time = 0.1
+block_timer_ui_after_seconds = 2.0
+should_block_timer_ui = true
+
+[node name="ShootTimer" type="Timer" parent="." unique_id=582424200]
+
+[node name="EnemySprite" type="Sprite2D" parent="." unique_id=1600629613]
+texture = ExtResource("2_qi2p4")
+
+[node name="EnemyGun" type="AnimatedSprite2D" parent="." unique_id=729363950]
+visible = false
+position = Vector2(-5, 125)
+rotation = -7.554434
+sprite_frames = ExtResource("3_qi2p4")
+animation = &"idle"
+autoplay = "idle"
+flip_v = true

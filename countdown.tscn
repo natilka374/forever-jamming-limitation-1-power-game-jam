@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://bwu65dj8d48le"]
+
+[ext_resource type="Script" uid="uid://2gw1t0kku6er" path="res://countdown_component.gd" id="1_ep8tu"]
+
+[node name="Countdown" type="Node2D" unique_id=972590327]
+script = ExtResource("1_ep8tu")
+inital_time = 5.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=482281662]
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = -16.0
+offset_right = 146.0
+offset_bottom = 23.0
+grow_horizontal = 2
+
+[node name="PreTimerText" type="Label" parent="HBoxContainer" unique_id=355383774]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Time remaining: "

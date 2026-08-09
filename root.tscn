@@ -1,0 +1,80 @@
+[gd_scene format=3 uid="uid://berp35ljcufky"]
+
+[ext_resource type="PackedScene" uid="uid://b0xd2hlebrj0n" path="res://enemy.tscn" id="1_jnlp7"]
+[ext_resource type="PackedScene" uid="uid://bo8hnkfxgffxg" path="res://player.tscn" id="1_pq8q7"]
+[ext_resource type="Script" uid="uid://dbfobc04is70t" path="res://countdown_ui.gd" id="2_pyidc"]
+[ext_resource type="Script" uid="uid://2gw1t0kku6er" path="res://countdown_component.gd" id="3_vvh5c"]
+[ext_resource type="Script" uid="uid://3qrmot6kwhq" path="res://game_manager.gd" id="6_l8v81"]
+
+[node name="root" type="Node" unique_id=21445670]
+
+[node name="Enemy" parent="." unique_id=897031378 instance=ExtResource("1_jnlp7")]
+position = Vector2(432, -93)
+scale = Vector2(1.5, 1.5)
+reaction_time = 1.0
+should_block_timer_ui = false
+
+[node name="player" parent="." unique_id=1313245369 instance=ExtResource("1_pq8q7")]
+position = Vector2(400, 150)
+allowed_shoot_margin = 0.1
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=979444392]
+
+[node name="CountdownUI" type="Node2D" parent="." unique_id=972590327 node_paths=PackedStringArray("timer_label")]
+z_index = -1
+position = Vector2(-221, -316)
+script = ExtResource("2_pyidc")
+timer_label = NodePath("HBoxContainer/Timer")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CountdownUI" unique_id=482281662]
+anchors_preset = 10
+anchor_right = 1.0
+offset_right = 419.0
+offset_bottom = 67.0
+grow_horizontal = 2
+
+[node name="PreTimerText" type="Label" parent="CountdownUI/HBoxContainer" unique_id=355383774]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Time remaining: "
+
+[node name="Timer" type="Label" parent="CountdownUI/HBoxContainer" unique_id=1281125506]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "0"
+
+[node name="Countdown" type="Node" parent="." unique_id=1661869056]
+script = ExtResource("3_vvh5c")
+initial_time = 5.0
+
+[node name="GameManager" type="Node" parent="." unique_id=1518163100]
+script = ExtResource("6_l8v81")
+
+[node name="RoundOverMenu" type="VBoxContainer" parent="." unique_id=1446639861]
+offset_left = -224.0
+offset_top = -62.0
+offset_right = 104.0
+offset_bottom = 31.0
+
+[node name="LostText" type="Label" parent="RoundOverMenu" unique_id=2080650206]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.25490198, 0.27450982, 1)
+theme_override_font_sizes/font_size = 68
+text = "YOU LOST!!"
+
+[node name="WonText" type="Label" parent="RoundOverMenu" unique_id=752886300]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.6917629, 0.26988074, 1)
+theme_override_font_sizes/font_size = 68
+text = "YOU WON!!"
+
+[node name="Reset" type="Button" parent="." unique_id=617935643]
+offset_left = -549.0
+offset_top = -276.0
+offset_right = -349.0
+offset_bottom = -176.0
+text = "Reset"
+
+[connection signal="pressed" from="Reset" to="GameManager" method="_on_reset_pressed"]

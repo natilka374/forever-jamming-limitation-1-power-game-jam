@@ -3,11 +3,9 @@ class_name Enemy
 
 @export var reaction_time: float
 @onready var shoot_timer: Timer = $ShootTimer
-@export var enemy_gun: AnimatedSprite2D
 
 @onready var countdown: Countdown = get_tree().current_scene.get_node("Countdown")
 @onready var countdown_ui: CountdownUI = get_tree().current_scene.get_node("CountdownUI")
-
 
 @export var block_timer_ui_after_seconds: float
 @export var should_block_timer_ui: bool
@@ -37,9 +35,6 @@ func shoot_player() -> void:
 	shoot_timer.start()
 	await shoot_timer.timeout
 	enemy_fired.emit()
-	
-	if enemy_gun:
-		enemy_gun.play("shoot")
 	
 func block_timer_ui() -> void:
 	var countdown_ui_container: HBoxContainer = countdown_ui.get_child(0)

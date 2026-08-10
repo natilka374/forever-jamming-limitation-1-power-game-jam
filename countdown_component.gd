@@ -3,27 +3,28 @@ class_name Countdown
 
 signal timer_finished
 
-var finished := false
+var is_running := false
 
 @export var initial_time: float
 
-var time_left: float
 var timer_text: Label
 
-func _ready() -> void:
-	time_left = initial_time
+var time_left: float
+var inital_time: float 
 
 func _process(delta: float) -> void:
-	if not finished:
-		#time_left = maxf(time_left - delta, 0.0)
+	if is_running:
 		time_left = time_left - delta
 		if time_left <= 0.0:
 			timer_finished.emit()
-			finished = true
+			is_running = false
 
-func reset() -> void:
+func start(time: float) -> void:
 	time_left = initial_time
-	finished = false
+	is_running = true
 
 func stop() -> void:
-	finished = true
+	is_running = false
+
+func resume() -> void:
+	is_running = false

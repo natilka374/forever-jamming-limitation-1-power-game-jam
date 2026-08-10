@@ -1,6 +1,5 @@
 [gd_scene format=3 uid="uid://berp35ljcufky"]
 
-[ext_resource type="PackedScene" uid="uid://b0xd2hlebrj0n" path="res://enemy.tscn" id="1_jnlp7"]
 [ext_resource type="PackedScene" uid="uid://bo8hnkfxgffxg" path="res://player.tscn" id="1_pq8q7"]
 [ext_resource type="Script" uid="uid://dbfobc04is70t" path="res://countdown_ui.gd" id="2_pyidc"]
 [ext_resource type="Script" uid="uid://2gw1t0kku6er" path="res://countdown_component.gd" id="3_vvh5c"]
@@ -8,11 +7,7 @@
 
 [node name="root" type="Node" unique_id=21445670]
 
-[node name="Enemy" parent="." unique_id=897031378 instance=ExtResource("1_jnlp7")]
-position = Vector2(432, -93)
-scale = Vector2(1.5, 1.5)
-reaction_time = 1.0
-should_block_timer_ui = false
+[node name="Enemies" type="Node" parent="." unique_id=912725284]
 
 [node name="player" parent="." unique_id=1313245369 instance=ExtResource("1_pq8q7")]
 position = Vector2(400, 150)
@@ -47,8 +42,13 @@ text = "0"
 script = ExtResource("3_vvh5c")
 initial_time = 5.0
 
-[node name="GameManager" type="Node" parent="." unique_id=1518163100]
+[node name="GameManager" type="Node" parent="." unique_id=32754613]
 script = ExtResource("6_l8v81")
+enemy_min_reaction_time = 0.05
+enemy_max_reaction_time = 1.0
+inital_time_max = 10.0
+inital_time_min = 3.0
+ENEMY_SPAWN_POSITION = Vector2(10, -50)
 
 [node name="RoundOverMenu" type="VBoxContainer" parent="." unique_id=1446639861]
 offset_left = -224.0
@@ -70,6 +70,13 @@ theme_override_colors/font_color = Color(0, 0.6917629, 0.26988074, 1)
 theme_override_font_sizes/font_size = 68
 text = "YOU WON!!"
 
+[node name="NextRound" type="Button" parent="RoundOverMenu" unique_id=774341998]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7885524, 0.40098533, 0.3165259, 1)
+theme_override_font_sizes/font_size = 48
+text = "NEXT ROUND"
+
 [node name="Reset" type="Button" parent="." unique_id=617935643]
 offset_left = -549.0
 offset_top = -276.0
@@ -77,4 +84,5 @@ offset_right = -349.0
 offset_bottom = -176.0
 text = "Reset"
 
+[connection signal="pressed" from="RoundOverMenu/NextRound" to="GameManager" method="_on_next_round_button_pressed"]
 [connection signal="pressed" from="Reset" to="GameManager" method="_on_reset_pressed"]
